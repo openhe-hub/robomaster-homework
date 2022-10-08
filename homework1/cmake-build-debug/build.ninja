@@ -74,6 +74,40 @@ build homework1: CXX_EXECUTABLE_LINKER__homework1_Debug CMakeFiles/homework1.dir
   TARGET_FILE = homework1
   TARGET_PDB = homework1.pdb
 
+# =============================================================================
+# Object build statements for EXECUTABLE target ex2.
+
+
+#############################################
+# Order-only phony target for ex2.
+
+build cmake_object_order_depends_target_ex2.: phony || CMakeFiles/ex2..dir
+
+build CMakeFiles/ex2..dir/src/ex2/ex2..c.o: C_COMPILER__ex2.2e_Debug /home/sjtu/code/cpp/robomaster/homework1/src/ex2/ex2..c || cmake_object_order_depends_target_ex2.
+  DEP_FILE = CMakeFiles/ex2..dir/src/ex2/ex2..c.o.d
+  FLAGS = -g
+  OBJECT_DIR = CMakeFiles/ex2..dir
+  OBJECT_FILE_DIR = CMakeFiles/ex2..dir/src/ex2
+  TARGET_COMPILE_PDB = CMakeFiles/ex2..dir/
+  TARGET_PDB = ex2..pdb
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target ex2.
+
+
+#############################################
+# Link the executable ex2.
+
+build ex2.: C_EXECUTABLE_LINKER__ex2.2e_Debug CMakeFiles/ex2..dir/src/ex2/ex2..c.o
+  FLAGS = -g
+  OBJECT_DIR = CMakeFiles/ex2..dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_COMPILE_PDB = CMakeFiles/ex2..dir/
+  TARGET_FILE = ex2.
+  TARGET_PDB = ex2..pdb
+
 
 #############################################
 # Utility command for edit_cache
@@ -109,7 +143,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Folder: /home/sjtu/code/cpp/robomaster/homework1/cmake-build-debug
 
-build all: phony homework1
+build all: phony homework1 ex2.
 
 # =============================================================================
 # Built-in targets

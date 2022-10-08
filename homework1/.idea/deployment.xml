@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="robomaster-sjtu-ubuntu (342f52a5-2db0-48c3-a37b-e6efd1b61fa9)" remoteFilesAllowedToDisappearOnAutoupload="false">
+  <component name="PublishConfigData" autoUpload="Always" serverName="robomaster-sjtu-ubuntu (342f52a5-2db0-48c3-a37b-e6efd1b61fa9)" remoteFilesAllowedToDisappearOnAutoupload="false" confirmBeforeUploading="false">
+    <option name="confirmBeforeUploading" value="false" />
     <serverData>
       <paths name="robomaster-sjtu-ubuntu (342f52a5-2db0-48c3-a37b-e6efd1b61fa9)">
         <serverdata>

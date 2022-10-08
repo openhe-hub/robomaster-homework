@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named ex2
+
+# Build rule for target.
+ex2: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ex2
+.PHONY : ex2
+
+# fast build rule for target.
+ex2/fast:
+	$(MAKE) -f CMakeFiles/ex2.dir/build.make CMakeFiles/ex2.dir/build
+.PHONY : ex2/fast
+
+#=============================================================================
 # Target rules for targets named homework1
 
 # Build rule for target.
@@ -150,6 +163,33 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/homework1.dir/build.make CMakeFiles/homework1.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+src/ex2/ex2.o: src/ex2/ex2.cpp.o
+
+.PHONY : src/ex2/ex2.o
+
+# target to build an object file
+src/ex2/ex2.cpp.o:
+	$(MAKE) -f CMakeFiles/ex2.dir/build.make CMakeFiles/ex2.dir/src/ex2/ex2.cpp.o
+.PHONY : src/ex2/ex2.cpp.o
+
+src/ex2/ex2.i: src/ex2/ex2.cpp.i
+
+.PHONY : src/ex2/ex2.i
+
+# target to preprocess a source file
+src/ex2/ex2.cpp.i:
+	$(MAKE) -f CMakeFiles/ex2.dir/build.make CMakeFiles/ex2.dir/src/ex2/ex2.cpp.i
+.PHONY : src/ex2/ex2.cpp.i
+
+src/ex2/ex2.s: src/ex2/ex2.cpp.s
+
+.PHONY : src/ex2/ex2.s
+
+# target to generate assembly for a file
+src/ex2/ex2.cpp.s:
+	$(MAKE) -f CMakeFiles/ex2.dir/build.make CMakeFiles/ex2.dir/src/ex2/ex2.cpp.s
+.PHONY : src/ex2/ex2.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -158,10 +198,14 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... ex2"
 	@echo "... homework1"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... src/ex2/ex2.o"
+	@echo "... src/ex2/ex2.i"
+	@echo "... src/ex2/ex2.s"
 .PHONY : help
 
 
