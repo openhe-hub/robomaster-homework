@@ -7,7 +7,7 @@
 4. 使用date作差计算运行时间
 ### How to Use
 ```shell
-chmod +x ./ex1.sh
+chmod +x ex1.sh
 ./ex1.sh path
 ```
 ---
