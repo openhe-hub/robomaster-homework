@@ -129,16 +129,6 @@ void drawId(cv::Mat &drawer, int &cnt, std::vector<Target> &targets, std::vector
         }
         if (!is_tracked) it = targets.erase(it);
     }
-//
-//    std::cout << "targets:" << std::endl;
-//    for (const auto &target: targets) {
-//        std::cout << "(" << target.lst_point.x << "," << target.lst_point.y << ")\t" << target.id << std::endl;
-//    }
-//    std::cout << "rects:" << std::endl;
-//    for (const auto &rect: rects) {
-//        std::cout << "(" << rect.center.x << "," << rect.center.y << ")\t" << std::endl;
-//    }
-//    std::cout << "=======================" << std::endl;
 
     std::vector<bool> locked(rects.size(),false);
     for (auto &target: targets) {
@@ -156,9 +146,7 @@ void drawId(cv::Mat &drawer, int &cnt, std::vector<Target> &targets, std::vector
                     cv::FONT_HERSHEY_TRIPLEX, 0.4, {225, 225, 25}, 1);
         target.lst_point = {rects[idx].center.x,rects[idx].center.y}; //refresh
         locked[idx]= true;
-//        std::cout << "(" << target.lst_point.x << "," << target.lst_point.y << ")" << std::endl;
     }
-//    std::cout << "=======================" << std::endl;
 }
 
 
