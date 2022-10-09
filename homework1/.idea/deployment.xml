@@ -6,8 +6,7 @@
       <paths name="robomaster-sjtu-ubuntu (342f52a5-2db0-48c3-a37b-e6efd1b61fa9)">
         <serverdata>
           <mappings>
-            <mapping deploy="/home/sjtu/code/cpp/robomaster/homework1" local="$PROJECT_DIR$" web="/" />
-            <mapping local="" />
+            <mapping deploy="/home/sjtu/code/cpp/robomaster/homework1" local="$PROJECT_DIR$" />
           </mappings>
           <excludedPaths>
             <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug" />

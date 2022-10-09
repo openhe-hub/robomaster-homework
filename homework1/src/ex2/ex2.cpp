@@ -10,7 +10,7 @@ bool judgeByArea(std::vector<cv::Point> &contour){
 int main(){
     cv::Mat src=cv::imread("../src/ex2/res/origin.png");
     assert(src.channels()==3);
-    // convert rgb=> hsv
+    // convert rgb=> cvt
     cv::Mat hsv;
     cv::cvtColor(src,hsv, cv::COLOR_RGB2HSV);
     // extract red & yellow
