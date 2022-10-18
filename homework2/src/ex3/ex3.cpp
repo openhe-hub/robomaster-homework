@@ -1,5 +1,7 @@
 #include <iostream>
 #include <fstream>
+#include <string>
+#include <random>
 
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -9,40 +11,50 @@
 #include <Eigen/Geometry>
 #include <Eigen/Dense>
 
-#include <GL/glut.h>
+#define R 2*sqrt(2)
+#define FRAME_CNT 500
+#define SCALE 2
+#define HEIGHT 1000
+#define WIDTH 1000
 
-#define N 80
-#define R 0.005f
-#define SCALE 1200
+std::vector<Eigen::Vector3d> read();
+std::vector<Eigen::Vector3d> calc(int frame,std::vector<Eigen::Vector3d> input);
+Eigen::Vector3d calc_camera_pos(int frame);
+void display(cv::Mat &drawer,std::vector<Eigen::Vector3d> points);
+int get_random(int low,int high);
 
-std::vector<Eigen::Vector3d> res;
 
-void calc();
+std::default_random_engine engine;
 
-void display();
 
 int main(int argc, char *argv[]) {
-    glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
-    glutInitWindowPosition(100, 100);
-    glutInitWindowSize(600, 600);
-    glutCreateWindow("result");
+    std::vector<Eigen::Vector3d> input=read();
+    std::string output_path="../src/ex3/output/out.avi";
+    double fps=80;
+    cv::Size size=cv::Size(WIDTH,HEIGHT);
+    cv::VideoWriter writer(output_path,
+                           cv::VideoWriter::fourcc('M','J','P','G'),
+                           fps,size, true);
 
-    calc();
-    glutDisplayFunc(&display);
-
-    glutMainLoop();
+    for (int i = 0; i <= FRAME_CNT; ++i) {
+        cv::Mat drawer=cv::Mat::zeros({WIDTH,HEIGHT},CV_8UC3);
+        display(drawer,calc(i,input));
+        cv::imshow("result",drawer);
+        cv::resizeWindow("result",{WIDTH,HEIGHT});
+        writer<<drawer;
+        cv::waitKey(10);
+    }
+    writer.release();
     return 0;
 }
 
-void calc() {
-    std::ifstream ifs("../src/ex2/res/points.txt");
-    std::ofstream ofs("../src/ex2/output/out.txt");
-    int num_points = 0;
-    ifs >> num_points;
 
-    Eigen::Vector3d cam_w = {2., 2., 2.};
+std::vector<Eigen::Vector3d> calc(int frame,std::vector<Eigen::Vector3d> input){
+    std::vector<Eigen::Vector3d> res;
+    res.resize(input.size());
+
     Eigen::Quaterniond q = {0.5, 0.5, -0.5, -0.5};
+    Eigen::Vector3d cam_w= calc_camera_pos(frame);
     Eigen::Matrix4d converter = [&cam_w, &q]() {
         Eigen::Matrix4d converter = Eigen::Matrix4d::Zero();
         Eigen::Matrix3d rot_c_to_w = q.matrix();
@@ -51,11 +63,9 @@ void calc() {
         return converter;
     }();
 
-    for (int i = 0; i < num_points; ++i) {
-        double x, y, z;
-        ifs >> x >> y >> z;
+    for (int i = 0; i < res.size(); ++i) {
         Eigen::Vector4d w4;
-        w4 << x, y, z, 1.;
+        w4 << input[i](0,0), input[i](1,0), input[i](2,0), 1.;
         Eigen::Matrix<double, 3, 4> cam_f;
         cam_f << 400., 0., 190., 0.,
                 0., 400., 160., 0.,
@@ -63,23 +73,44 @@ void calc() {
         Eigen::Vector4d c4 = converter * w4;
         Eigen::Vector3d u3 = cam_f * c4;
         u3 /= u3(2, 0);
-        res.push_back(u3);
-        ofs << u3(0, 0) << " " << u3(1, 0) << "\n";
+        res[i] = u3;
+    }
+    return res;
+}
+
+std::vector<Eigen::Vector3d> read(){
+    std::ifstream ifs("../src/ex3/res/points.txt");
+    int cnt;
+    ifs>>cnt;
+    std::vector<Eigen::Vector3d> input;
+    for (int i = 0; i < cnt; ++i) {
+        double x,y,z;
+        ifs>>x>>y>>z;
+        input.push_back({x,y,z});
+    }
+    ifs.close();
+    return input;
+}
+
+Eigen::Vector3d calc_camera_pos(int frame){
+    double theta=frame*M_PI/(4*FRAME_CNT);
+    Eigen::Vector3d cam_w={R* cos(theta),R* sin(theta),R*sin(theta)};
+    return cam_w;
+}
+
+void display(cv::Mat &drawer,std::vector<Eigen::Vector3d> points){
+    for (int i = 0; i < points.size(); ++i) {
+        int x= floor(points[i](0,0)/SCALE)+WIDTH/2;
+        int y= floor(points[i](1,0)/SCALE)+HEIGHT/2;
+        cv::circle(drawer,{x,y}, get_random(1,4),
+                   {255,static_cast<double>(get_random(150,255)),
+                    static_cast<double>(get_random(150,255))},cv::FILLED);
     }
 }
 
-void display() {
-    glClear(GL_COLOR_BUFFER_BIT);
-    glColor3f(1.0, 0.0, 0.0);
-    for (Eigen::Vector3d pt:res) {
-        double x=pt(0,0), y=pt(1,0);
-        glBegin(GL_POLYGON);
-        for (int j = 0; j < N; ++j) {
-            glVertex2d(x / SCALE + R * cos(2 * M_PI / N * j),
-                       y / SCALE + R * sin(2 * M_PI / N * j));
-        }
-        glEnd();
-    }
-    glFlush();
+int get_random(int low,int high){
+    std::uniform_int_distribution<int> dis(low,high);
+    return dis(engine);
 }
+
 
