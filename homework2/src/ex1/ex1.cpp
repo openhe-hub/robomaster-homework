@@ -10,12 +10,12 @@ int main() {
     cv::cvtColor(src, hsv, cv::COLOR_RGB2HSV);
     // hsv extraction
     cv::Mat hsv_result;
-    cv::inRange(hsv, cv::Scalar(0, 90, 46), cv::Scalar(10, 255, 255), hsv_result);
+    cv::inRange(hsv, cv::Scalar(0, 43, 46), cv::Scalar(10, 255, 255), hsv_result);
     // close operation
     cv::Mat close;
     cv::Mat element = cv::getStructuringElement(cv::MORPH_RECT, cv::Size(2, 2));
     cv::morphologyEx(hsv_result, close, cv::MORPH_CLOSE, element);
-//    cv::imshow("close", close);
+    cv::imwrite("../src/ex1/output/hsv.jpg",close);
     // find contour
     std::vector<std::vector<cv::Point>> contours;
     std::vector<cv::Vec4i> hierarchy;
@@ -30,33 +30,38 @@ int main() {
         }
     }
     cv::drawContours(drawer, contours, max_idx, {20, 20, 220}, 3);
-//    cv::imshow("contour", drawer);
+    cv::imwrite("../src/ex1/output/contour.jpg",drawer);
 
     // get bounding rectangle
     cv::Rect rect = cv::boundingRect(contours[max_idx]);
-    cv::rectangle(src, {rect.x, rect.y},
-                  {rect.x + rect.size().width, rect.y + rect.size().height}, {20, 220, 20}, 3);
-//    cv::imshow("result", src);
 
     // transformation
-    cv::Point2f srcPts[4],dstPts[4];
-    cv::Mat result=cv::Mat::zeros(rect.size(),CV_8UC3);
-    srcPts[0]={static_cast<float>(rect.x),static_cast<float>(rect.y)};
-    srcPts[1]={static_cast<float>(rect.x+rect.size().width),static_cast<float>(rect.y)};
-    srcPts[2]={static_cast<float>(rect.x),static_cast<float>(rect.y+rect.size().height)};
-    srcPts[3]={static_cast<float>(rect.x+rect.size().width),static_cast<float>(rect.y+rect.size().height)};
-    dstPts[0]={static_cast<float>(0),static_cast<float>(0)};
-    dstPts[1]={static_cast<float>(rect.size().width),static_cast<float>(0)};
-    dstPts[2]={static_cast<float>(0),static_cast<float>(rect.size().height)};
-    dstPts[3]={static_cast<float>(rect.size().width),static_cast<float>(rect.size().height)};
+    cv::Point2f srcPts[4], dstPts[4];
+    cv::Mat result = cv::Mat::zeros(rect.size(), CV_8UC3);
+    const int dx=12;
+    srcPts[0] = {static_cast<float>(rect.x-dx), static_cast<float>(rect.y)};
+    srcPts[1] = {static_cast<float>(rect.x + rect.size().width), static_cast<float>(rect.y)};
+    srcPts[2] = {static_cast<float>(rect.x), static_cast<float>(rect.y + rect.size().height)};
+    srcPts[3] = {static_cast<float>(rect.x + rect.size().width+dx), static_cast<float>(rect.y + rect.size().height)};
 
-    cv::Mat transform=cv::getPerspectiveTransform(srcPts,dstPts);
-    cv::warpPerspective(src,result,transform,src.size());
-    result = result(cv::Rect(0,0,rect.size().width,rect.size().height));
-    cv::imshow("result",result);
-    cv::imwrite("../src/ex1/output/result.jpg",result);
+    dstPts[0] = {static_cast<float>(0), static_cast<float>(0)};
+    dstPts[1] = {static_cast<float>(rect.size().width), static_cast<float>(0)};
+    dstPts[2] = {static_cast<float>(0), static_cast<float>(rect.size().height)};
+    dstPts[3] = {static_cast<float >(rect.size().width), static_cast<float >(rect.size().height)};
+
+    cv::Mat transform = cv::getPerspectiveTransform(srcPts, dstPts);
+    cv::warpPerspective(src, result, transform, src.size());
+    result = result(cv::Rect(0, 0, rect.size().width, rect.size().height));
+    cv::imshow("result", result);
+    cv::imwrite("../src/ex1/output/result.jpg", result);
+
+    //draw rectangle
+    cv::rectangle(src, {rect.x, rect.y},
+                  {rect.x + rect.size().width, rect.y + rect.size().height}, {20, 220, 20}, 3);
+    cv::imwrite("../src/ex1/output/rect.jpg",src);
 
     cv::waitKey(0);
     return 0;
 }
+
 
