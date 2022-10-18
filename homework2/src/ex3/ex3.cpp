@@ -12,14 +12,15 @@
 #include <Eigen/Dense>
 
 #define R 2*sqrt(2)
-#define FRAME_CNT 500
+#define FRAME_CNT 300
 #define SCALE 2
 #define HEIGHT 1000
 #define WIDTH 1000
+#define PAUSE 120
 
 std::vector<Eigen::Vector3d> read();
-std::vector<Eigen::Vector3d> calc(int frame,std::vector<Eigen::Vector3d> input);
-Eigen::Vector3d calc_camera_pos(int frame);
+std::vector<Eigen::Vector3d> calc(int frame,std::vector<Eigen::Vector3d> input,double &theta);
+Eigen::Vector3d calc_camera_pos(int frame,double &theta);
 void display(cv::Mat &drawer,std::vector<Eigen::Vector3d> points);
 int get_random(int low,int high);
 
@@ -30,31 +31,37 @@ std::default_random_engine engine;
 int main(int argc, char *argv[]) {
     std::vector<Eigen::Vector3d> input=read();
     std::string output_path="../src/ex3/output/out.avi";
-    double fps=80;
+    double fps=60;
     cv::Size size=cv::Size(WIDTH,HEIGHT);
     cv::VideoWriter writer(output_path,
                            cv::VideoWriter::fourcc('M','J','P','G'),
                            fps,size, true);
 
+    double theta=-M_PI*3/20;
     for (int i = 0; i <= FRAME_CNT; ++i) {
         cv::Mat drawer=cv::Mat::zeros({WIDTH,HEIGHT},CV_8UC3);
-        display(drawer,calc(i,input));
+        display(drawer,calc(i,input,theta));
         cv::imshow("result",drawer);
         cv::resizeWindow("result",{WIDTH,HEIGHT});
         writer<<drawer;
         cv::waitKey(10);
+        if (i==FRAME_CNT){
+            for (int j = 0; j <=PAUSE; ++j) {
+                writer<<drawer;
+            }
+        }
     }
     writer.release();
     return 0;
 }
 
 
-std::vector<Eigen::Vector3d> calc(int frame,std::vector<Eigen::Vector3d> input){
+std::vector<Eigen::Vector3d> calc(int frame,std::vector<Eigen::Vector3d> input,double &theta){
     std::vector<Eigen::Vector3d> res;
     res.resize(input.size());
 
     Eigen::Quaterniond q = {0.5, 0.5, -0.5, -0.5};
-    Eigen::Vector3d cam_w= calc_camera_pos(frame);
+    Eigen::Vector3d cam_w= calc_camera_pos(frame,theta);
     Eigen::Matrix4d converter = [&cam_w, &q]() {
         Eigen::Matrix4d converter = Eigen::Matrix4d::Zero();
         Eigen::Matrix3d rot_c_to_w = q.matrix();
@@ -92,9 +99,10 @@ std::vector<Eigen::Vector3d> read(){
     return input;
 }
 
-Eigen::Vector3d calc_camera_pos(int frame){
-    double theta=frame*M_PI/(4*FRAME_CNT);
-    Eigen::Vector3d cam_w={R* cos(theta),R* sin(theta),R*sin(theta)};
+Eigen::Vector3d calc_camera_pos(int frame,double &theta){
+    theta+=M_PI/(2.5*FRAME_CNT)*(1-1*frame/FRAME_CNT);
+    std::cout<<theta<<std::endl;
+    Eigen::Vector3d cam_w={R* cos(theta), R* sin(theta), R*sin(theta)};
     return cam_w;
 }
 
