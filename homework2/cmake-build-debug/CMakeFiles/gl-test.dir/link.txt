@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/gl-test.dir/test/test.cpp.o  -o gl-test  /usr/lib/x86_64-linux-gnu/libGL.so /usr/lib/x86_64-linux-gnu/libGLU.so /usr/lib/x86_64-linux-gnu/libglut.so 
