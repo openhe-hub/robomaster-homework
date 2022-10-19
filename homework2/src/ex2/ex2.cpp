@@ -48,7 +48,6 @@ void calc() {
         Eigen::Matrix3d rot_c_to_w = q.matrix();
         converter.block(0, 0, 3, 3) = rot_c_to_w.transpose().cast<double>();
         converter.block(0, 3, 3, 1) = -rot_c_to_w.transpose().cast<double>() * cam_w;
-        converter(3,3)=1;
         return converter;
     }();
 
@@ -77,7 +76,7 @@ void display() {
         glBegin(GL_POLYGON);
         for (int j = 0; j < N; ++j) {
             glVertex2d(x / SCALE + R * cos(2 * M_PI / N * j)-0.5,
-                       y / SCALE + R * sin(2 * M_PI / N * j)-0.3);
+                       -y / SCALE + R * sin(2 * M_PI / N * j)+0.3);
         }
         glEnd();
     }
