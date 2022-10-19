@@ -63,13 +63,14 @@ std::vector<Eigen::Vector3d> calc(int frame, std::vector<Eigen::Vector3d> input,
     std::vector<Eigen::Vector3d> res;
     res.resize(input.size());
 
-    Eigen::Quaterniond q = {0.5, 0.5, -0.5, -0.5};
+    Eigen::Quaterniond q = {-0.5, 0.5, 0.5, -0.5};
     Eigen::Vector3d cam_w = calc_camera_pos(frame, theta);
     Eigen::Matrix4d converter = [&cam_w, &q]() {
         Eigen::Matrix4d converter = Eigen::Matrix4d::Zero();
         Eigen::Matrix3d rot_c_to_w = q.matrix();
         converter.block(0, 0, 3, 3) = rot_c_to_w.transpose().cast<double>();
         converter.block(0, 3, 3, 1) = -rot_c_to_w.transpose().cast<double>() * cam_w;
+        converter(3,3)=1;
         return converter;
     }();
 
@@ -112,8 +113,8 @@ Eigen::Vector3d calc_camera_pos(int frame, double &theta) {
 
 void display(cv::Mat &drawer, std::vector<Eigen::Vector3d> points) {
     for (int i = 0; i < points.size(); ++i) {
-        int x = -floor(points[i](0, 0) / SCALE) - 100 + WIDTH / 2;
-        int y = -floor(points[i](1, 0) / SCALE) + HEIGHT / 2;
+        int x = floor(points[i](0, 0) / SCALE)  + WIDTH / 2-250;
+        int y = floor(points[i](1, 0) / SCALE) + HEIGHT / 2-200;
         //this condition is to reduce the points near the edge
         if ((pow(abs(x-WIDTH/2),2)+ pow(abs(y-HEIGHT/2),2)<= pow(WIDTH/4,2)|| !get_random(0,2))){
             cv::circle(drawer, {x, y}, get_random(1, 4),
