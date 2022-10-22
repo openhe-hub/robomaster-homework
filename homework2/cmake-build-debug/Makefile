@@ -111,6 +111,45 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named ex3
+
+# Build rule for target.
+ex3: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ex3
+.PHONY : ex3
+
+# fast build rule for target.
+ex3/fast:
+	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/build
+.PHONY : ex3/fast
+
+#=============================================================================
+# Target rules for targets named gl-test
+
+# Build rule for target.
+gl-test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gl-test
+.PHONY : gl-test
+
+# fast build rule for target.
+gl-test/fast:
+	$(MAKE) -f CMakeFiles/gl-test.dir/build.make CMakeFiles/gl-test.dir/build
+.PHONY : gl-test/fast
+
+#=============================================================================
+# Target rules for targets named ex2
+
+# Build rule for target.
+ex2: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ex2
+.PHONY : ex2
+
+# fast build rule for target.
+ex2/fast:
+	$(MAKE) -f CMakeFiles/ex2.dir/build.make CMakeFiles/ex2.dir/build
+.PHONY : ex2/fast
+
+#=============================================================================
 # Target rules for targets named ex1
 
 # Build rule for target.
@@ -150,6 +189,87 @@ src/ex1/ex1.cpp.s:
 	$(MAKE) -f CMakeFiles/ex1.dir/build.make CMakeFiles/ex1.dir/src/ex1/ex1.cpp.s
 .PHONY : src/ex1/ex1.cpp.s
 
+src/ex2/ex2.o: src/ex2/ex2.cpp.o
+
+.PHONY : src/ex2/ex2.o
+
+# target to build an object file
+src/ex2/ex2.cpp.o:
+	$(MAKE) -f CMakeFiles/ex2.dir/build.make CMakeFiles/ex2.dir/src/ex2/ex2.cpp.o
+.PHONY : src/ex2/ex2.cpp.o
+
+src/ex2/ex2.i: src/ex2/ex2.cpp.i
+
+.PHONY : src/ex2/ex2.i
+
+# target to preprocess a source file
+src/ex2/ex2.cpp.i:
+	$(MAKE) -f CMakeFiles/ex2.dir/build.make CMakeFiles/ex2.dir/src/ex2/ex2.cpp.i
+.PHONY : src/ex2/ex2.cpp.i
+
+src/ex2/ex2.s: src/ex2/ex2.cpp.s
+
+.PHONY : src/ex2/ex2.s
+
+# target to generate assembly for a file
+src/ex2/ex2.cpp.s:
+	$(MAKE) -f CMakeFiles/ex2.dir/build.make CMakeFiles/ex2.dir/src/ex2/ex2.cpp.s
+.PHONY : src/ex2/ex2.cpp.s
+
+src/ex3/ex3.o: src/ex3/ex3.cpp.o
+
+.PHONY : src/ex3/ex3.o
+
+# target to build an object file
+src/ex3/ex3.cpp.o:
+	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/src/ex3/ex3.cpp.o
+.PHONY : src/ex3/ex3.cpp.o
+
+src/ex3/ex3.i: src/ex3/ex3.cpp.i
+
+.PHONY : src/ex3/ex3.i
+
+# target to preprocess a source file
+src/ex3/ex3.cpp.i:
+	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/src/ex3/ex3.cpp.i
+.PHONY : src/ex3/ex3.cpp.i
+
+src/ex3/ex3.s: src/ex3/ex3.cpp.s
+
+.PHONY : src/ex3/ex3.s
+
+# target to generate assembly for a file
+src/ex3/ex3.cpp.s:
+	$(MAKE) -f CMakeFiles/ex3.dir/build.make CMakeFiles/ex3.dir/src/ex3/ex3.cpp.s
+.PHONY : src/ex3/ex3.cpp.s
+
+test/test.o: test/test.cpp.o
+
+.PHONY : test/test.o
+
+# target to build an object file
+test/test.cpp.o:
+	$(MAKE) -f CMakeFiles/gl-test.dir/build.make CMakeFiles/gl-test.dir/test/test.cpp.o
+.PHONY : test/test.cpp.o
+
+test/test.i: test/test.cpp.i
+
+.PHONY : test/test.i
+
+# target to preprocess a source file
+test/test.cpp.i:
+	$(MAKE) -f CMakeFiles/gl-test.dir/build.make CMakeFiles/gl-test.dir/test/test.cpp.i
+.PHONY : test/test.cpp.i
+
+test/test.s: test/test.cpp.s
+
+.PHONY : test/test.s
+
+# target to generate assembly for a file
+test/test.cpp.s:
+	$(MAKE) -f CMakeFiles/gl-test.dir/build.make CMakeFiles/gl-test.dir/test/test.cpp.s
+.PHONY : test/test.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -158,10 +278,22 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... ex3"
+	@echo "... gl-test"
+	@echo "... ex2"
 	@echo "... ex1"
 	@echo "... src/ex1/ex1.o"
 	@echo "... src/ex1/ex1.i"
 	@echo "... src/ex1/ex1.s"
+	@echo "... src/ex2/ex2.o"
+	@echo "... src/ex2/ex2.i"
+	@echo "... src/ex2/ex2.s"
+	@echo "... src/ex3/ex3.o"
+	@echo "... src/ex3/ex3.i"
+	@echo "... src/ex3/ex3.s"
+	@echo "... test/test.o"
+	@echo "... test/test.i"
+	@echo "... test/test.s"
 .PHONY : help
 
 

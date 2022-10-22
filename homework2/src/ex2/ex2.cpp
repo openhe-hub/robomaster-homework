@@ -42,11 +42,14 @@ void calc() {
     ifs >> num_points;
 
     Eigen::Vector3d cam_w = {2., 2., 2.};
+    //陀螺仪给出的四元数，代表相机坐标系转世界坐标系
     Eigen::Quaterniond q = {-0.5, 0.5, 0.5, -0.5};  //d,a,b,c => ai+bj+ck+d
     Eigen::Matrix4d converter = [&cam_w, &q]() {
         Eigen::Matrix4d converter = Eigen::Matrix4d::Zero();
         Eigen::Matrix3d rot_c_to_w = q.matrix();
+        //旋转矩阵是正交矩阵，所以矩阵的转置就是矩阵的逆，代表世界坐标系转相机坐标系
         converter.block(0, 0, 3, 3) = rot_c_to_w.transpose().cast<double>();
+        //相机在相机坐标系的原点，所以取负
         converter.block(0, 3, 3, 1) = -rot_c_to_w.transpose().cast<double>() * cam_w;
         return converter;
     }();
@@ -57,11 +60,13 @@ void calc() {
         Eigen::Vector4d w4;
         w4 << x, y, z, 1.;
         Eigen::Matrix<double, 3, 4> cam_f;
+        //相机内参矩阵
         cam_f << 400., 0., 190., 0.,
                 0., 400., 160., 0.,
                 0., 0., 1., 0.;
         Eigen::Vector4d c4 = converter * w4;
         Eigen::Vector3d u3 = cam_f * c4;
+        //归一化至二维像素坐标系，即z=1的平面点
         u3 /= u3(2, 0);
         res.push_back(u3);
         ofs << u3(0, 0) << " " << u3(1, 0) << "\n";

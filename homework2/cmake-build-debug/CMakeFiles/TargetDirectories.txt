@@ -1,6 +1,6 @@
-/home/sjtu/code/cpp/robomaster/homework2/cmake-build-debug/CMakeFiles/ex1.dir
-/home/sjtu/code/cpp/robomaster/homework2/cmake-build-debug/CMakeFiles/ex2.dir
-/home/sjtu/code/cpp/robomaster/homework2/cmake-build-debug/CMakeFiles/ex3.dir
-/home/sjtu/code/cpp/robomaster/homework2/cmake-build-debug/CMakeFiles/gl-test.dir
-/home/sjtu/code/cpp/robomaster/homework2/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/sjtu/code/cpp/robomaster/homework2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/tmp/tmp.TJwn1KKsci/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/tmp/tmp.TJwn1KKsci/cmake-build-debug/CMakeFiles/edit_cache.dir
+/tmp/tmp.TJwn1KKsci/cmake-build-debug/CMakeFiles/ex3.dir
+/tmp/tmp.TJwn1KKsci/cmake-build-debug/CMakeFiles/gl-test.dir
+/tmp/tmp.TJwn1KKsci/cmake-build-debug/CMakeFiles/ex2.dir
+/tmp/tmp.TJwn1KKsci/cmake-build-debug/CMakeFiles/ex1.dir
