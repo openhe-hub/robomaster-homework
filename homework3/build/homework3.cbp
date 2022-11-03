@@ -5,7 +5,7 @@
 		<Option title="homework3"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\usr\;CMake Files\..\..\usr\local\;CMake Files\..\..\usr\local\lib\;CMake Files\..\..\usr\local\lib\cmake\;CMake Files\..\..\usr\local\lib\cmake\opencv4\;CMake Files\..\..\usr\lib\;CMake Files\..\..\usr\lib\cmake\;CMake Files\..\..\usr\lib\cmake\eigen3\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\usr\;CMake Files\..\..\usr\local\;CMake Files\..\..\usr\local\lib\;CMake Files\..\..\usr\local\lib\cmake\;CMake Files\..\..\usr\local\lib\cmake\opencv4\;CMake Files\..\..\usr\local\lib\cmake\Ceres\;CMake Files\..\..\usr\lib\;CMake Files\..\..\usr\lib\cmake\;CMake Files\..\..\usr\lib\cmake\eigen3\;CMake Files\..\..\usr\lib\x86_64-linux-gnu\;CMake Files\..\..\usr\lib\x86_64-linux-gnu\cmake\;CMake Files\..\..\usr\lib\x86_64-linux-gnu\cmake\TBB\;CMake Files\..\..\usr\lib\x86_64-linux-gnu\cmake\gflags\;"/>
 		<Build>
 			<Target title="all">
 				<Option working_dir="/tmp/tmp.L7XxpkvIQL/build"/>
@@ -308,6 +308,27 @@
 		<Unit filename="/tmp/tmp.L7XxpkvIQL/../../usr/local/lib/cmake/opencv4/OpenCVModules.cmake">
 			<Option virtualFolder="CMake Files\..\..\usr\local\lib\cmake\opencv4\"/>
 		</Unit>
+		<Unit filename="/tmp/tmp.L7XxpkvIQL/../../usr/local/lib/cmake/Ceres/CeresConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\usr\local\lib\cmake\Ceres\"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.L7XxpkvIQL/../../usr/local/lib/cmake/Ceres/CeresConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\usr\local\lib\cmake\Ceres\"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.L7XxpkvIQL/../../usr/local/lib/cmake/Ceres/CeresTargets-release.cmake">
+			<Option virtualFolder="CMake Files\..\..\usr\local\lib\cmake\Ceres\"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.L7XxpkvIQL/../../usr/local/lib/cmake/Ceres/CeresTargets.cmake">
+			<Option virtualFolder="CMake Files\..\..\usr\local\lib\cmake\Ceres\"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.L7XxpkvIQL/../../usr/local/lib/cmake/Ceres/FindGlog.cmake">
+			<Option virtualFolder="CMake Files\..\..\usr\local\lib\cmake\Ceres\"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.L7XxpkvIQL/../../usr/local/lib/cmake/Ceres/FindMETIS.cmake">
+			<Option virtualFolder="CMake Files\..\..\usr\local\lib\cmake\Ceres\"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.L7XxpkvIQL/../../usr/local/lib/cmake/Ceres/FindSuiteSparse.cmake">
+			<Option virtualFolder="CMake Files\..\..\usr\local\lib\cmake\Ceres\"/>
+		</Unit>
 		<Unit filename="/tmp/tmp.L7XxpkvIQL/../../usr/lib/cmake/eigen3/Eigen3Config.cmake">
 			<Option virtualFolder="CMake Files\..\..\usr\lib\cmake\eigen3\"/>
 		</Unit>
@@ -316,6 +337,24 @@
 		</Unit>
 		<Unit filename="/tmp/tmp.L7XxpkvIQL/../../usr/lib/cmake/eigen3/Eigen3Targets.cmake">
 			<Option virtualFolder="CMake Files\..\..\usr\lib\cmake\eigen3\"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.L7XxpkvIQL/../../usr/lib/x86_64-linux-gnu/cmake/TBB/TBBConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\usr\lib\x86_64-linux-gnu\cmake\TBB\"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.L7XxpkvIQL/../../usr/lib/x86_64-linux-gnu/cmake/TBB/TBBConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\usr\lib\x86_64-linux-gnu\cmake\TBB\"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.L7XxpkvIQL/../../usr/lib/x86_64-linux-gnu/cmake/gflags/gflags-config-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\usr\lib\x86_64-linux-gnu\cmake\gflags\"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.L7XxpkvIQL/../../usr/lib/x86_64-linux-gnu/cmake/gflags/gflags-config.cmake">
+			<Option virtualFolder="CMake Files\..\..\usr\lib\x86_64-linux-gnu\cmake\gflags\"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.L7XxpkvIQL/../../usr/lib/x86_64-linux-gnu/cmake/gflags/gflags-nonamespace-targets-release.cmake">
+			<Option virtualFolder="CMake Files\..\..\usr\lib\x86_64-linux-gnu\cmake\gflags\"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.L7XxpkvIQL/../../usr/lib/x86_64-linux-gnu/cmake/gflags/gflags-nonamespace-targets.cmake">
+			<Option virtualFolder="CMake Files\..\..\usr\lib\x86_64-linux-gnu\cmake\gflags\"/>
 		</Unit>
 	</Project>
 </CodeBlocks_project_file>
