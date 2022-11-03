@@ -41,6 +41,7 @@ int main() {
     std::cout << "t:" << std::endl << -tvec << std::endl;
     // rotate: from cam to imu
     Eigen::Vector4d ret= rotate(tvec);
+    std::cout<<ret<<std::endl;
     std::ofstream ofs(R"(../src/ex1/out/res.txt)");
     ofs<<"("<<ret(0)<<","<<ret(1)<<","<<ret(2)<<")"<<std::endl;
     return 0;
@@ -52,7 +53,7 @@ void locate(cv::Mat &drawer) {
     }
 }
 
-// 相机坐标系转陀螺仪坐标系
+// camera => imu
 Eigen::Vector4d rotate(cv::Mat tvec) {
     //d,a,b,c => ai+bj+ck+d
     // 0.994363i + -0.0676645j + -0.00122528k + -0.0816168
@@ -62,16 +63,15 @@ Eigen::Vector4d rotate(cv::Mat tvec) {
     Eigen::Matrix4d converter = [&cam_w, &q]() {
         Eigen::Matrix4d converter = Eigen::Matrix4d::Zero();
         Eigen::Matrix3d rot_c_to_w = q.matrix();
-        //旋转矩阵是正交矩阵，所以矩阵的转置就是矩阵的逆，代表世界坐标系转相机坐标系
+        // camera => world
         converter.block(0, 0, 3, 3) = rot_c_to_w.cast<double>();
-        //相机在相机坐标系的原点，所以取负
         converter.block(0, 3, 3, 1) = -rot_c_to_w.cast<double>() * cam_w;
+        converter(3,3)=1;
         return converter;
     }();
 
     Eigen::Vector4d pt_cam;
     pt_cam<<-tvec.at<double>(0,0),-tvec.at<double>(1,0),-tvec.at<double>(2,0),1;
     Eigen::Vector4d  ret=converter*pt_cam;
-    std::cout<<ret<<std::endl;
     return ret;
 }
