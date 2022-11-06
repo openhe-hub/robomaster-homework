@@ -13,7 +13,7 @@
 int main() {
     //get data
     std::ifstream ifs(R"(../src/ex2/res/dollar.txt)");
-    std::ofstream ofs(R"(../src/ex2/out/res.txt)");
+    std::ofstream ofs(R"(../src/ex2/out/res2.txt)");
     double data[N],buffer;
     int cnt=0;
 

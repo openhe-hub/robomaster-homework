@@ -71,8 +71,8 @@ int main() {
     double rms = cv::calibrateCamera(point_grid_pos, point_pix_pos, img_size, camera_mat, distort_mat, rvecs, tvecs);
     std::cout << rms << std::endl;
     std::cout << camera_mat << std::endl << distort_mat << std::endl;
-    // write to res.txt
-    std::ofstream ofs(R"(../src/ex4/out2/res.txt)");
+    // write to res2.txt
+    std::ofstream ofs(R"(../src/ex4/out2/res2.txt)");
     ofs << "rms re-projection error= " << rms << std::endl;
     ofs << "camera internal params=\n" << camera_mat << std::endl;
     ofs << "distort matrix=" << distort_mat << std::endl;

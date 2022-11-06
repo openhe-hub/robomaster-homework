@@ -42,7 +42,7 @@ int main() {
     // rotate: from cam to imu
     Eigen::Vector3d ret= rotate(tvec);
     std::cout<<ret<<std::endl;
-    std::ofstream ofs(R"(../src/ex1/out/res.txt)");
+    std::ofstream ofs(R"(../src/ex1/out/res2.txt)");
     ofs<<"("<<ret(0)<<","<<ret(1)<<","<<ret(2)<<")"<<std::endl;
     return 0;
 }
