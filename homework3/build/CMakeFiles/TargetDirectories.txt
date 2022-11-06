@@ -1,7 +1,7 @@
-/tmp/tmp.L7XxpkvIQL/build/CMakeFiles/rebuild_cache.dir
-/tmp/tmp.L7XxpkvIQL/build/CMakeFiles/ex4_2.dir
-/tmp/tmp.L7XxpkvIQL/build/CMakeFiles/ex4.dir
-/tmp/tmp.L7XxpkvIQL/build/CMakeFiles/edit_cache.dir
-/tmp/tmp.L7XxpkvIQL/build/CMakeFiles/ex3.dir
-/tmp/tmp.L7XxpkvIQL/build/CMakeFiles/ex2.dir
-/tmp/tmp.L7XxpkvIQL/build/CMakeFiles/ex1.dir
+/home/sjtu/code/cpp/robomaster/homework3/build/CMakeFiles/ex1.dir
+/home/sjtu/code/cpp/robomaster/homework3/build/CMakeFiles/ex2.dir
+/home/sjtu/code/cpp/robomaster/homework3/build/CMakeFiles/ex3.dir
+/home/sjtu/code/cpp/robomaster/homework3/build/CMakeFiles/ex4.dir
+/home/sjtu/code/cpp/robomaster/homework3/build/CMakeFiles/ex4_2.dir
+/home/sjtu/code/cpp/robomaster/homework3/build/CMakeFiles/edit_cache.dir
+/home/sjtu/code/cpp/robomaster/homework3/build/CMakeFiles/rebuild_cache.dir

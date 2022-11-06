@@ -27,20 +27,20 @@ cv::Mat distort_mat = (cv::Mat_<float>(1, 5)
 
 void locate(cv::Mat &drawer);
 
-Eigen::Vector4d rotate(cv::Mat tvec);
+Eigen::Vector3d rotate(cv::Mat tvec);
 
 int main() {
     // init and locate the armor points
     cv::Mat src = cv::imread(R"(../src/ex1/res/hero.jpg)");
     locate(src);
-    cv::imshow("locate armor", src);
-    cv::waitKey(1000);
+//    cv::imshow("locate armor", src);
+//    cv::waitKey(1000);
     // solve pnp
     cv::Mat rvec, tvec;
     cv::solvePnP(pts_dst, pts_origin, camera_mat, distort_mat, rvec, tvec);
     std::cout << "t:" << std::endl << -tvec << std::endl;
     // rotate: from cam to imu
-    Eigen::Vector4d ret= rotate(tvec);
+    Eigen::Vector3d ret= rotate(tvec);
     std::cout<<ret<<std::endl;
     std::ofstream ofs(R"(../src/ex1/out/res.txt)");
     ofs<<"("<<ret(0)<<","<<ret(1)<<","<<ret(2)<<")"<<std::endl;
@@ -54,24 +54,13 @@ void locate(cv::Mat &drawer) {
 }
 
 // camera => imu
-Eigen::Vector4d rotate(cv::Mat tvec) {
+Eigen::Vector3d rotate(cv::Mat tvec) {
     //d,a,b,c => ai+bj+ck+d
     // 0.994363i + -0.0676645j + -0.00122528k + -0.0816168
     Eigen::Quaterniond q = {-0.0816168, 0.994363, -0.0676645, -0.00122528};
-    // set camera as origin point
-    Eigen::Vector3d cam_w = {0,0,0};
-    Eigen::Matrix4d converter = [&cam_w, &q]() {
-        Eigen::Matrix4d converter = Eigen::Matrix4d::Zero();
-        Eigen::Matrix3d rot_c_to_w = q.matrix();
-        // camera => world
-        converter.block(0, 0, 3, 3) = rot_c_to_w.cast<double>();
-        converter.block(0, 3, 3, 1) = -rot_c_to_w.cast<double>() * cam_w;
-        converter(3,3)=1;
-        return converter;
-    }();
-
-    Eigen::Vector4d pt_cam;
-    pt_cam<<-tvec.at<double>(0,0),-tvec.at<double>(1,0),-tvec.at<double>(2,0),1;
-    Eigen::Vector4d  ret=converter*pt_cam;
+    Eigen::Matrix3d rot=q.matrix();
+    Eigen::Vector3d pt_cam;
+    pt_cam<<tvec.at<double>(0,0),tvec.at<double>(1,0),tvec.at<double>(2,0);
+    Eigen::Vector3d ret=rot*pt_cam;
     return ret;
 }
