@@ -43,10 +43,13 @@ int main(){
     // 6. draw
     cv::Mat drawer;
     cv::drawMatches(img1,key_points1,img2,key_points2,good_pairs,drawer);
-    cv::imshow("result",drawer);
-    cv::resizeWindow("result",600,800);
+//    cv::imshow("result",drawer);
+//    cv::resizeWindow("result",600,800);
     cv::imwrite(R"(../src/ex1/out/out.jpg)",drawer);
-    cv::waitKey(0);
+
+    cv::drawKeypoints(img1,key_points1,img1,{25,225,25},cv::DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
+    cv::imwrite(R"(../src/ex1/out/key_points.jpg)",img1);
+//    cv::waitKey(0);
     return 0;
 }
 
