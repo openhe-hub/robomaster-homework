@@ -3,7 +3,7 @@ project(homework4)
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(SOURCE_FILES ex1 ex3 ex4)
+set(SOURCE_FILES ex1 ex4)
 
 find_package(OpenCV REQUIRED)
 find_package(Eigen3 REQUIRED)
@@ -18,4 +18,7 @@ endforeach ()
 
 add_executable(ex2 src/ex2/ex2.cpp src/ex2/VO.cpp src/ex2/VO.h)
 target_link_libraries(ex2 ${OpenCV_LIBS})
+
+add_executable(ex3 src/ex3/ex3.cpp src/ex3/VO.cpp src/ex3/VO.h)
+target_link_libraries(ex3 ${OpenCV_LIBS})
 
