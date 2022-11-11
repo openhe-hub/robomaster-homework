@@ -17,13 +17,20 @@ void track(cv::Mat &gray, cv::Mat &prev_gray,
 
 int main() {
     cv::VideoCapture capture(R"(../src/ex4/res/lk.mp4)");
+
     cv::Mat src, gray, prev_gray, feature_canvas, track_canvas;
     std::vector<cv::Point2f> features, prev_features;
     std::vector<uchar> status;
     std::vector<float> err;
     int frame = 0;
+    capture>>src;
 
-    while (capture.read(src)) {
+    cv::VideoWriter writer(R"(../src/ex4/out/out.avi)",
+                           cv::VideoWriter::fourcc('M','J','P','G'),
+                           50,cv::Size(src.cols,src.rows), true);
+
+
+    while (!src.empty()) {
         frame++;
         std::cout << prev_features.size() << std::endl;
 
@@ -50,7 +57,12 @@ int main() {
         cv::imshow("track", track_canvas);
         cv::waitKey(100);
 
+        capture>>src;
+        writer<<track_canvas;
     }
+
+    capture.release();
+    writer.release();
     return 0;
 }
 
